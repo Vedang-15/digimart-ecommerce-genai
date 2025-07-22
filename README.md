@@ -67,9 +67,6 @@ ecommerce-project/
 ├── README.md
 └── LICENSE
 
-yaml
-Copy
-Edit
 
 ---
 
@@ -89,10 +86,6 @@ To run the **real AI version locally**:
 2. Install `Mistral 7B Instruct` model
 3. Start LM Studio server at:
 http://localhost:1234/v1/chat
-
-yaml
-Copy
-Edit
 4. Run `genai-local` Angular frontend and backend together
 5. Interact with the description generator and see live responses!
 
@@ -100,20 +93,12 @@ Edit
 
 ## 🛠️ Local Setup Instructions
 
-### 1. Clone the repository
-```bash
+1. Clone the repository
 git clone https://github.com/yourusername/ecommerce-ai-app.git
 cd ecommerce-ai-app
 2. Start the backend
-bash
-Copy
-Edit
 cd backend-springboot
 ./mvnw spring-boot:run
-3. Start the frontend
-bash
-Copy
-Edit
 cd ../frontend-angular/mock-ai
 npm install
 ng serve --ssl true --ssl-key ./sslcert/key.pem --ssl-cert ./sslcert/cert.pem
