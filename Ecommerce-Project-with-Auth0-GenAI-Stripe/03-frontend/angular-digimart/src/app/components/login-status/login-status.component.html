@@ -1,0 +1,28 @@
+<div class="login-status-header">
+
+  <!-- Show user's name if authenticated and userName is available -->
+  <div *ngIf="isAuthenticated && userName" class="login-status-user-info">
+    Hey {{ userName }}!
+  </div>
+
+  <!-- Show login button if not authenticated -->
+  <button *ngIf="!isAuthenticated" (click)="login()" class="au-btn-submit">Login</button>
+
+  <!-- Show logout and member buttons if authenticated -->
+  <button *ngIf="isAuthenticated" (click)="logout()" class="security-btn au-btn-submit button-padding">Logout</button>
+  <button *ngIf="isAuthenticated" routerLink="/members" class="separate security-btn ml-1 au-btn-submit button-padding">Member</button>
+  <button *ngIf="isAuthenticated" routerLink="/order-history" class="separate security-btn ml-1 au-btn-submit button-padding">Orders</button>
+
+</div>
+
+
+
+
+
+<!-- Actual flow of application (How is the login status displayed): -->
+    <!-- To display the login status, we create a new login-status component. Inside the login-status.component.ts file, we first define the isAuthenticated and userFullName field. Th isAuthenticated will hold the current state, ie whther the current usert is authenticated or not. Basd on this info, we will change buttons on our status bar. we then inject the oath service. Then inside the oninit function, subscribe to this service and check whether the user is authenticated or not.If yes, we update the status of isAuthentiucated variable and gt the user details through a getUserDetails functioned defined in same file.We also implemnt a logout functionality. Now, once the isAuthenticated is populated, inside the login-status.component.html file, based on the populatd value, we ither show the logout button and users name or just the login button. Since we have subscribed to the okta service, whenvever, login status changes, the value of isAuthenticated gets updated automaticvally and based on updated value, login-status-component.html gets modified and renderd.Inside the login-status-component.html file, if user is not logged in, we show login button, upon clicking which we redirect to "/login" route(defined in roytes array).If he is logged in we sho logout button, upon clicking hich, we call the logout() method defined in login-status-component.ts file. -->
+
+
+
+<!-- Actual flow of application (How does VIP member access work?): -->
+    <!-- We first add a member button to the header bar. This button will be shown only to logged in users, and will redirct th users to "/members" route, which will in turn render the members-page component that we first create. This members route is a protected route, meaning it will be accessible only to authorized users. If the user is not logged in, we redirect him to "/login" route. If the uesr is authorised, he gets to see th members only page(rendered through the members-page.component.html page). Also note that we make no changes to members page-component.ts file here.  -->

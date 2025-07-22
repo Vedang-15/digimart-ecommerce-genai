@@ -1,0 +1,125 @@
+/* Container Styling */
+.main-content.page-m {
+  background-color: #f2f2f2;
+  padding: 30px 15px;
+  padding-top: 80px;
+  /* background-image: url('https://www.transparenttextures.com/patterns/cubes.png'); 
+  background-size: 100px 100px;
+  background-repeat: repeat; */
+
+}
+
+/* Section Box */
+.form-area {
+  background-color: #ffffff;
+  padding: 25px 30px;
+  margin-bottom: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  border-left: 6px solid #205b8d;
+  margin-top: 50px;
+}
+
+/* Section Title */
+.form-area h3 {
+  display: inline-block;
+  padding: 8px 16px;
+  background: #e6ecf3;
+  border-radius: 6px;
+  font-size: 18px;
+  color: #205b8d;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+/* Labels */
+label {
+  font-weight: 500;
+  color: #333;
+}
+
+/* Input Containers */
+.input-space {
+  width: 100%;
+}
+
+input[type="text"],
+select {
+  width: 100%;
+  padding: 10px 15px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  transition: border-color 0.3s;
+}
+
+input[type="text"]:focus,
+select:focus {
+  border-color: #0da8e4;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(13, 168, 228, 0.1);
+}
+
+
+/* Validation Alerts */
+.alert.alert-danger {
+  font-size: 13px;
+  margin-top: 5px;
+  padding: 5px 10px;
+}
+
+/* Checkbox Styling */
+.au-checkbox {
+  display: flex;
+  align-items: center;
+  margin: 15px 0;
+}
+
+.au-checkbox input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  margin-right: 10px;
+}
+
+.au-checkmark {
+  display: none; /* You can style custom checkmarks if needed */
+}
+
+/* Stripe Section */
+#card-element {
+  padding: 10px 15px;
+  background: #f8f9fa;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+#card-errors {
+  margin-top: 8px;
+  color: #dc3545;
+  font-size: 13px;
+}
+
+/* Review Section */
+.form-area p {
+  margin-bottom: 6px;
+  color: #333;
+  font-weight: 500;
+}
+
+
+/* Submit Button */
+button[type="submit"] {
+  padding: 10px 30px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 8px;
+  background-color: #0da8e4;
+  color: white;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #0876a3;
+}

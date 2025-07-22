@@ -1,0 +1,98 @@
+<div class = "main-content">
+    <div class = "section-content section-content-p30">
+        <div class = "container-fluid">
+
+            <div *ngIf = "cartItemsArray.length > 0">
+
+                <table class = "table table-bordered">
+                    <thead>
+                        <tr>
+                            <th width = "20%">Product Image</th>
+                            <th width="50%">Product Detail</th>
+                            <th width="30%">Summary</th>
+                        </tr>
+                    </thead>
+                    
+
+                    <tr *ngFor = "let tempCartItem of cartItemsArray" class="cart-row">
+                        <td>
+                            <img src = "{{ tempCartItem.imageUrl }}" class = "img-responsive" width = "150px" />
+                        </td>
+                        <td>
+                            <p>{{ tempCartItem.name }}</p>
+                            <p>{{ tempCartItem.unitPrice | currency: 'INR' : 'symbol-narrow' }}</p>
+                        </td>
+                        <td>
+                            <div class = "items">
+                                <label>Quantity : </label> 
+
+                                <div class = "row no-gutters">
+                                    <div class = "col">
+                                        <button (click) = "incrementQuantity(tempCartItem)" class = "btn btn-primary btn-sm">
+                                            <i class = "fas fa-plus"></i>
+                                        </button>
+                                    </div>
+                                    <div class = "col ml-4 mr-2">
+                                        {{ tempCartItem.quantity}}
+                                    </div>
+                                    <div class="col">
+                                        <button (click) = "decrementQuantity(tempCartItem)"  class="btn btn-primary btn-sm">
+                                            <i class="fas fa-minus"></i>
+                                        </button>
+                                    </div>
+
+                                    <div class = "col-8"></div>
+                                </div>
+                            </div>
+
+                            <p><button (click)="removeFromCart(tempCartItem)" class="btn btn-danger btn-sm">Remove</button></p>
+
+                            <p class = "mt-2">Subtotal : {{ tempCartItem.quantity * tempCartItem.unitPrice | currency: 'INR' : 'symbol-narrow'}}</p>
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td colspan = "2"></td>
+                        <td style = "font-weight : bold">
+                            <p>Total Quantity : {{ totalQuantity }}</p>
+                            <p>Shipping : Free</p>
+                            <p>Total Price : {{ totalPrice | currency: 'INR' : 'symbol-narrow' }}</p>
+                            <p><a routerLink="/checkout" class="btn btn-primary">Checkout</a></p>
+                        </td>
+                    </tr>
+
+                </table>
+
+            </div>
+
+            <!-- if cart is empty -->
+            <div *ngIf = "cartItemsArray.length == 0" class = "alert alert-warning col-md-12" role = "alert">
+                Your Shopping cart is empty.
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Actual flow of application( How the cart items are diaplayed collectively and how is increment, decrement and removal taking plac in cart) : 
+
+So to diaplay the cart i9tems, we create a new component, cart-details and component and add a new route in routes array, "/cart-details". We add click handlers on the cart status icons(th icons on top right corner of the page that diaply the total price and quantity of the cart). Whenecer these status icon\s are clicked, we make a call to the path "/cart-details" and the cart-details component is rendred.Inside the cart-details-component.ts file, we first inject a cartService object(for calling cartServic properties) and then define theCartItemsArray, totalPrice and totalQuantity fields. Themn inside the onmInit function of this file(which gets executed when this component is about to be rendered, we call the listCartDetails() method, also declared isnide the same file. In this methos, we first dirctly assign the cartItems array of cartSrvice to the cartServiceArray declared here) and for the remaining two fields, we subscribe to cartService.totalPrice and cartService.totalQuantity, thereby populating their values too(these values are actually populated when the this.cartService.computeCartTotals();  method is called, as this ios the method that is actually publishing the values.). This subscription ensures that whenever in the future, the values of totalPrice and totalQuantity change and are published by cartServic, our cart details component will automatically get the updated values(due to subscription) and will be able to r-render its own html page with updated values. Once these fields are populated, inside the cart-details-component.html file, we iterate of the cartItemsArray and render each item. We also mention the obtained totalPrice and totalQuantity values on the details page. In this way, cart items are shown.
+
+Now, for the increment, decrement and removal part : 
+1) Insertion : We add a button with symbol + to cart-details-component.html page with each cartItem that is rendered. Whenever this is click, the corresponding cartItem is passsed to a method named addTocart(dfined in cart-details-component.ts) which in turn calls the addToCartHelper() method present in cartService.ts by passing the receive dcartItem.Since cartService/ts has the actula cartItems array, this sent cartItem is added to that array, and totalPrice and totalQuantity are again calculated and published. Now the cart-status component and cart-details compoent both have subscribed to cartServidce for totalPrice and totalQuantity, hence both of them recive the new published info. The moment they receive the updated info, their respecvtive html pages are re-rendered with upodated info, and thus w se the updations on main app screen. Thsi is the benefit of publisher-subscriber policay. Any change, wnhever it occurs, is publishe dto allk the subscribers, and all the sunscribers, as soon as they receive th updated info, re-rnder tehri html files with the u7pdated info. We dont need to do anything, This happens automatically. As soon asinfo is published, subscribers receive it and re-rnder the associated compoent html files. THis is how incrememt happens.
+2) Decrement : We add a - symbol that calls decrementQuantity() method by passing th concernd cart item, which then calls dcrmtntFromCart() methos. This method defined in cartService and inside this methos we decremnt the quantity. If after decrement, quantity is 0, we call another method defined in same file, removeFromCartHlkper() that removes the item from cart and calls the computeCartTotals() method.If after decrement, value is non zero, we call the computeCartTotals() method(also define din cartService.ts).This is the method where th updated cart total, totalPrice and totalQuantity are calculated and published. Subscribers receive the published info and re-render their html component files.
+3) Removal : When button is clicked, we call remove methos of cart-details-component.ts, which calls removeFromCartHelper(). Here removal occus, and computeCartTotals() is called which publ;ished the updated results.  -->
+
+
+
+<!-- Importance of using Publisher-Subscriber pattern in our application :
+We use publisher-subscriber pattern to ensure that all components are updated with the latest
+data. By publishing the TotalPrice and TotalQuantity values and having the cart-status-component subscribe to them, we
+ensure that any changes in these values are immediately reflected in the UI. This approach helps maintain consistency
+across different components and provides real-time updates to the user interface. While it may seem like we could
+directly return these values, using the publisher-subscriber pattern allows for a more dynamic and responsive
+application, especially in scenarios where multiple components need to be updated simultaneously based on certain events
+or changes in data. -->

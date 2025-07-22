@@ -1,0 +1,52 @@
+<!-- Wrapper div to center the product detail card vertically and horizontally -->
+<div class="detail-wrapper">
+    
+    <!-- if currProduct is not null, then display the details -->
+    <div *ngIf="currProduct" class="card detail-card shadow-lg">
+        
+        <div class="row no-gutters">
+
+            <!-- left side: product image -->
+            <div class="col-md-4 d-flex justify-content-center align-items-center p-3">
+                <img [src]="currProduct.imageUrl" alt="Product image" class="detail-img" />
+            </div>
+
+            <!-- right side: product info -->
+            <div class="col-md-8 p-3">
+                <div class="card-body">
+
+                    <!-- product name -->
+                    <h4 class="card-title">{{ currProduct.name }}</h4>
+
+                    <!-- product price -->
+                    <p class="price">{{ currProduct.unitPrice | currency: 'INR' : 'symbol-narrow' }}</p>
+
+                    <!-- Add to cart button -->
+                    <button (click)="addToCart(currProduct)" class="btn btn-primary btn-sm" style="margin: 15px 0;">
+                        Add to cart
+                    </button>
+                    <!-- Since we are calling addToCart() method inside product-detail.component.html,
+                         we must declare this method inside product-detail.component.ts -->
+
+                    <hr>
+
+                    <!-- Product description -->
+                    <h5>Description</h5>
+                    <p>{{ currProduct.description }}</p>
+
+                    <!-- Link to go back to product list -->
+                    <br>
+                    <a routerLink="/products">← Back to Product list</a>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+
+<!-- Actual flow of application(for product-detail-master-view) :  -->
+    <!-- Quite similar to getiing products by Id. We first create a new component, product-details-component. We then add a route corresponmding to path "products/:productId", in the routes array that will render the created component. Note that productId represents id of the product whose mastr view we want. We also add this link route to the product image and name. So that when the products image or name is clickes, we make a call to the path "products/:productId" and the product-details-component gets rendered. Then Inside the product-details-component.ts file, we define a currProduct, the product that spring boot app will return based on the passed product id. Inside the onInit function of the product-details-component.ts file, we make a call to handleProductDeatils() method, which is also defined inside the same file. Insiode this methgos, we first obtain the passed productId from the current active route and then call the getProduct() method by passing th obtained productId.Since handleProductDetails() has subscribd to getProduct(), getProduct() return its output to handleProductDetails(). This method is declared isnide ProductServiuce class, and this method makes a cakk to spring boot app url : http://localhost:8080/api/products/someProductId. Note that we dont explicitly need to define this endpoint in spring boot app, like we did for get all products by id(FindByCategoryId), or for product-category(FindByNameContaining).This endpoint is given by defauly by spring data rest. So, the returned product respons is mapped to currProduct(in the subscriber code in handleProductDeatils()), thus currProduct gets populated. Then we render the product-details-component.html file where we us the populated currProduct info. -->

@@ -1,0 +1,399 @@
+<div class = "main-content page-m">
+    <div class = "section-content section-content-p30">
+        <div class = "container-fluid">
+            <form [formGroup] = "checkoutFormGroup" (ngSubmit) = "onSubmitForm()">   
+            <!-- this checkoutFormGroup corresponds to the instance checkoutFormGroup : FormGroup that we created in checkout-component.ts file -->
+
+                <!-- customer form group -->
+                <div formGroupName = "customer" class = "form-area">
+                    <h3>Customer</h3> 
+                    <!-- corresponds to the customer group defined in checkout-component.ts file.  -->
+                    <div class = "row">
+                        <div class = "col-md-2"><label>First Name</label></div>
+                        <div class = "col-md-9">
+                            <div class = "input-space">
+                                <input formControlName = "firstName" type="text">  
+                                <!-- firstName corresponds to firstName field defined in checkout-component.ts file inside the customer group. By doing this, we are basically binding these html form fields with the field defined in checkout-component.ts file. We are establishing parallel relationship between groups and field defined in this html file and the ts file. -->
+
+
+
+                                <!-- following is the code for validation(it displays error mssage if validation of this field fails) -->
+                                <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class = "alert alert-danger mt-1">
+                                    <!-- firstName mentioned/used here comes from the getter( get firstName() method) defined in checkout-component.ts -->
+
+                                    <div *ngIf="firstName.errors.required || firstName.errors.notOnlyWhitespace">
+                                        First Name is required
+                                    </div>
+
+                                    <div *ngIf="firstName.errors.minlength">
+                                        First Name must be at least 2 characters long
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-2"><label>Last Name</label></div>
+                        <div class="col-md-9">
+                            <div class="input-space">
+                                <input formControlName="lastName" type="text">
+
+                                <!-- validation -->
+                                <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="alert alert-danger mt-1">
+                                    <!-- lastName mentioned/used here comes from the getter( get lastName() method) defined in checkout-component.ts -->
+                                
+                                    <div *ngIf="lastName.errors.required || lastName.errors.notOnlyWhitespace">
+                                        Last Name is required
+                                    </div>
+                                
+                                    <div *ngIf="lastName.errors.minlength">
+                                        Last Name must be at least 2 characters long
+                                    </div>
+                                
+                                </div>
+                            </div>
+                        </div>
+                    
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-2"><label>Email</label></div>
+                        <div class="col-md-9">
+                            <div class="input-space">
+                                <input formControlName="email" type="text">
+
+                                <!-- validation -->
+                                <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger mt-1">
+                                    <!-- email mentioned/used here comes from the getter( get email() method) defined in checkout-component.ts -->
+                                
+                                    <div *ngIf="email.errors.required">
+                                        Email is required
+                                    </div>
+                                
+                                    <div *ngIf="email.errors.pattern">
+                                        Email must be a valid email format
+                                    </div>
+                                
+                                </div>
+                            </div>
+                        </div>
+                    
+                    </div>
+                </div>
+
+                <!-- shipping address group -->
+                <div formGroupName="shippingAddress" class="form-area">
+                    <h3>Shipping Address</h3>
+                    <!-- corresponds to the shippingAddress group defined in checkout-component.ts file.  -->
+                    <div class="row">
+                        <div class="col-md-2"><label>Country</label></div>
+                        <div class="col-md-9">
+                            <div class="input-space">
+                                <select formControlName="country" (change)="getStates('shippingAddress')">
+                                    <option value="">-- Select a Country --</option>
+                                    <option *ngFor="let country of countries" [value]="country.code">{{ country.name }}</option>
+                                </select>
+
+
+                                <!-- validation -->
+                                <div *ngIf="ShippingAddressCountry.invalid && (ShippingAddressCountry.dirty || ShippingAddressCountry.touched)" class="alert alert-danger mt-1">
+                                    <!-- ShippingAddressCountry mentioned/used here comes from the getter( get ShippingAddressCountry() method) defined in checkout-component.ts -->
+                                
+                                    <div *ngIf="ShippingAddressCountry.errors.required">
+                                        Country is required
+                                    </div>
+                                
+                                </div>
+                                
+                            </div>
+                        </div>
+                
+                    </div>
+                
+                    <div class="row">
+                        <div class="col-md-2"><label>Street</label></div>
+                        <div class="col-md-9">
+                            <div class="input-space">
+                                <input formControlName="street" type="text">
+
+                                <!-- validation -->
+                                <div *ngIf="ShippingAddressStreet.invalid && (ShippingAddressStreet.dirty || ShippingAddressStreet.touched)" class="alert alert-danger mt-1">
+                                    
+                                    <div *ngIf="ShippingAddressStreet.errors.required || ShippingAddressStreet.errors.notOnlyWhitespace">
+                                        Street is required
+                                    </div>
+                                
+                                    <div *ngIf="ShippingAddressStreet.errors.minlength">
+                                        Street must be at least 2 characters long
+                                    </div>
+                                
+                                </div>
+                            </div>
+                        </div>
+                
+                    </div>
+                
+                    <div class="row">
+                        <div class="col-md-2"><label>City</label></div>
+                        <div class="col-md-9">
+                            <div class="input-space">
+                                <input formControlName="city" type="text">
+
+                                <!-- validation -->
+                                <div *ngIf="ShippingAddressCity.invalid && (ShippingAddressCity.dirty || ShippingAddressCity.touched)"
+                                    class="alert alert-danger mt-1">
+                                
+                                    <div *ngIf="ShippingAddressCity.errors.required || ShippingAddressCity.errors.notOnlyWhitespace">
+                                        City is required
+                                    </div>
+                                
+                                    <div *ngIf="ShippingAddressCity.errors.minlength">
+                                        City must be at least 2 characters long
+                                    </div>
+                                
+                                </div>
+                            </div>
+                        </div>
+                
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-2"><label>State</label></div>
+                        <div class="col-md-9">
+                            <div class="input-space">
+                                <select formControlName="state">
+                                    <option *ngFor="let currState of shippingAddressStates" [ngValue] = "currState">{{ currState.name }}</option>
+                                </select>
+
+                                <!-- validation -->
+                                <div *ngIf="ShippingAddressState.invalid && (ShippingAddressState.dirty || ShippingAddressState.touched)"
+                                    class="alert alert-danger mt-1">
+                                
+                                    <div *ngIf="ShippingAddressState.errors.required">
+                                        State is required
+                                    </div>
+                                
+                                </div>
+                            
+                            </div>
+                        </div>
+                    
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-2"><label>Zip Code</label></div>
+                        <div class="col-md-9">
+                            <div class="input-space">
+                                <input formControlName="zipCode" type="text">
+
+                                <!-- validation -->
+                                <div *ngIf="ShippingAddressZipCode.invalid && (ShippingAddressZipCode.dirty || ShippingAddressZipCode.touched)"
+                                    class="alert alert-danger mt-1">
+                                
+                                    <div *ngIf="ShippingAddressZipCode.errors.required || ShippingAddressZipCode.errors.notOnlyWhitespace">
+                                        ZipCode is required
+                                    </div>
+
+                                    <div *ngIf="ShippingAddressZipCode.errors.minlength">
+                                        ZipCode must be at least 2 characters long
+                                    </div>
+                                
+                                </div>
+                            </div>
+                        </div>
+                    
+                    </div>
+                </div>
+
+                <!-- add checkbox to copy shipping address to billing address -->
+                <div class="form-check my-3">
+                    <input class="form-check-input" type="checkbox" id="sameAsShipping" (change)="copyShippingAddressToBillingAddress($event)">
+                    <label class="form-check-label fw-semibold" for="sameAsShipping">
+                        Billing Address same as Shipping Address
+                    </label>
+                </div>
+
+
+
+                <!-- billing address group -->
+                <div formGroupName="billingAddress" class="form-area">
+                    <h3>Billing Address</h3>
+                    <!-- corresponds to the billingAddress group defined in checkout-component.ts file.  -->
+                    <div class="row">
+                        <div class="col-md-2"><label>Country</label></div>
+                        <div class="col-md-9">
+                            <div class="input-space">
+                                <select formControlName="country" (change)="getStates('billingAddress')">
+                                    <option value="">-- Select a Country --</option>
+                                    <option *ngFor="let country of countries" [value]="country.code">{{ country.name }}</option>
+                                </select>
+                
+                                <!-- validation -->
+                                <div *ngIf="BillingAddressCountry.invalid && (BillingAddressCountry.dirty || BillingAddressCountry.touched)"
+                                    class="alert alert-danger mt-1">
+                                    <!-- BillingAddressCountry mentioned/used here comes from the getter( get BillingAddressCountry() method) defined in checkout-component.ts -->
+                
+                                    <div *ngIf="BillingAddressCountry.errors.required">
+                                        Country is required
+                                    </div>
+                
+                                </div>
+                
+                            </div>
+                        </div>
+                
+                    </div>
+                
+                    <div class="row">
+                        <div class="col-md-2"><label>Street</label></div>
+                        <div class="col-md-9">
+                            <div class="input-space">
+                                <input formControlName="street" type="text">
+                
+                                <!-- validation -->
+                                <div *ngIf="BillingAddressStreet.invalid && (BillingAddressStreet.dirty || BillingAddressStreet.touched)"
+                                    class="alert alert-danger mt-1">
+                
+                                    <div *ngIf="BillingAddressStreet.errors.required || BillingAddressStreet.errors.notOnlyWhitespace">
+                                        Street is required
+                                    </div>
+                
+                                    <div *ngIf="BillingAddressStreet.errors.minlength">
+                                        Street must be at least 2 characters long
+                                    </div>
+                
+                                </div>
+                            </div>
+                        </div>
+                
+                    </div>
+                
+                    <div class="row">
+                        <div class="col-md-2"><label>City</label></div>
+                        <div class="col-md-9">
+                            <div class="input-space">
+                                <input formControlName="city" type="text">
+                
+                                <!-- validation -->
+                                <div *ngIf="BillingAddressCity.invalid && (BillingAddressCity.dirty || BillingAddressCity.touched)"
+                                    class="alert alert-danger mt-1">
+                
+                                    <div *ngIf="BillingAddressCity.errors.required || BillingAddressCity.errors.notOnlyWhitespace">
+                                        City is required
+                                    </div>
+                
+                                    <div *ngIf="BillingAddressCity.errors.minlength">
+                                        City must be at least 2 characters long
+                                    </div>
+                
+                                </div>
+                            </div>
+                        </div>
+                
+                    </div>
+                
+                    <div class="row">
+                        <div class="col-md-2"><label>State</label></div>
+                        <div class="col-md-9">
+                            <div class="input-space">
+                                <select formControlName="state">
+                                    <option *ngFor="let currState of billingAddressStates" [ngValue]="currState">{{ currState.name }}
+                                    </option>
+                                </select>
+                
+                                <!-- validation -->
+                                <div *ngIf="BillingAddressState.invalid && (BillingAddressState.dirty || BillingAddressState.touched)"
+                                    class="alert alert-danger mt-1">
+                
+                                    <div *ngIf="BillingAddressState.errors.required">
+                                        State is required
+                                    </div>
+                
+                                </div>
+                
+                            </div>
+                        </div>
+                
+                    </div>
+                
+                    <div class="row">
+                        <div class="col-md-2"><label>Zip Code</label></div>
+                        <div class="col-md-9">
+                            <div class="input-space">
+                                <input formControlName="zipCode" type="text">
+                
+                                <!-- validation -->
+                                <div *ngIf="BillingAddressZipCode.invalid && (BillingAddressZipCode.dirty || BillingAddressZipCode.touched)"
+                                    class="alert alert-danger mt-1">
+                
+                                    <div
+                                        *ngIf="BillingAddressZipCode.errors.required || BillingAddressZipCode.errors.notOnlyWhitespace">
+                                        ZipCode is required
+                                    </div>
+
+                                    <div *ngIf="BillingAddressZipCode.errors.minlength">
+                                        ZipCode must be at least 2 characters long
+                                    </div>
+                
+                                </div>
+                            </div>
+                        </div>
+                
+                    </div>
+                </div>
+
+                <!-- credit card group -->
+                <!-- Stripe Elements Credit card section -->
+                <div formGroupName = "creditCard" class = "form-area">
+                    <h3>Credit or Debit Card</h3>
+                    <div id = "card-element">
+                        <!-- a Stripe element will be inserted/mounted here. -->
+                    </div>
+
+                    <!-- Used to display form errors(errors in credit card info) -->
+                     <div id = "card-errors" class = "displayError.textContent!=='': 'alert alert-danger mt-1'"></div>
+
+                </div>
+                <!-- Review your order section -->
+                <div class = "form-area">
+                    <h3>Review your Order</h3>
+                    <p>Total Quantity : {{ totalQuantity }}</p>
+                    <p>Shipping : FREE</p>
+                    <p>Total Price : {{ totalPrice | currency: 'INR' : 'symbol-narrow' }}</p>
+                </div>
+
+                <!-- submit button -->
+                <div class="text-center">
+                    <button type="submit" class="btn btn-info" [disabled]="isDisabled">Pruchase</button> 
+                    <!-- since this is a form, do not add (click) = "obSubmitForm" to this button, instead add (ngSubmit) = "onSubmitForm" to form header. Adding (click) = "someFunction" to some button is fine for normal buttons, but it is not preferred with forms. With forms, add the function to be called in form header and add a button just for submit purpose.-->
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Actual flow of application(How does checkout work) : 
+We create a new component named checkoyt-component, and add a new route "/chckout" in our route array that rnmders this comp[onent. We then add a new checkout button at end of the cart-details page, which on being clicked directs to9 "/checkout" route and renders the checkout-component. In this componnt,  for the checkout page, we create a form. We use reactive forms of angular hre. We first dfine the form inside the checkout-component.ts file using FormBuilder, then define the form inside the checkout-component.html file(which is going to be rendered) and establish a mapping between fields of htmol file and fields defined in checkout-component.html file. This nsures that whnever the html fields are filled by user in hte for, the corresponding fileds of the checkout-component.ts file get populated with the user-entered data, and these fields can then be processed. -->
+
+<!-- Filling the credit card months and years field values dynamically : 
+We have added dropdown in the html file for these two fields. Now we populate these dropdowns dynamically. To do so, we first create a new service called checkout-form-service.ts . This srvice will help in providing the months and year in dropdown. Firstly, we define two arrays creditCardMonths[] and crditCradYears[] inside the checkout-component.ts file. These arrays, once populated with appropriated months and years, can be rendered in the dropdown of checkout-compo9nent.html file. Then inside the ngOnInit() methgod of checkout-compo0nent.ts file(where the form fields were defined), we subscribe to the getCreditCardMonths() method by passing the current month(we get currnt going month using date object properties.) We also subscribe to getCreditCardYears() method. Both of these methods are defined inside checkout-form-service.ts file.Inisde the getCreditCardMonths() method, we take the passed startMonth and loop oif remaining months from the starting . We store these months in an array and then publish this array. Since we have subscribed to this methos in checkout-component.ts fuile, the creditCardMonths array defind in checkout-component.ts file gets populated after this methos publishes/retu8rns the data. Similarly the getCreditCradYears() method created an array of the next 10 years starting from current year, and publishes/returns the array. Thus both arrays defined in checkout-component.ts file gets populated. Now, months actually depens om year. For the currenmt year, we ned to show all months starting from current month(as we are fiulling for credit card expiration date here). But for future years, we ned to sho all months. To handle this, once the year is filled through dropdown , a handleMonthsAndYears() gets called(as soon as we select any year). Inside this methos, we first check if the selected year is same as current year. If yes, we set startmonth as currentmonth. If not, we set startmonth as 1. Using this ne startMonth value ,we again make a call to the gtCreditCardMonths() method and subscribe to returnd result. As soon as result is returned, creditCardMonths() array gets repopulated(it was populated first through the call made in OnInit mthod), and this repopulated array again gets renbdred in checkout-componbent.html file. -->
+
+
+<!-- Filling Country and states dropdown dynamically : 
+For doing this, we add country and state tables in our database. Then we create corrsponding entities in th backend, establish advanced mappings betwen them , and expose endpoints using spring data rest. We also add another mthod in stateRepositiory that ill return states based on country code(this is done to get all states corresponding to a particular country). In the front end too, we create classes corresponding to country and state. Then inside the checkout-component.ts file, e define the countries arr, the shippingAddressStates and billingAddressStates arrays. Then inside the Oninit() method, we subscribe to getCountries() method defined in checkout-form-service.ts fuile. Inside this, method, we buil;d suitable url and make a c all to backend. The retuirned results is tyhem mapped to countries arrya and published/returned to oninit method(from here call was made). As soon as the country is chosen, another method called getStates() gets called by passing the current formGroupName(whether its shippingAddress or billingAddress). Inside this method, we obtain the country code and a call is made to another getStates() method defined in checkout-form-service.html file, by passing the obtained country code. Inside this method, again suitable url is built and a call is made to backend rest api, amnd a luist of states corresponding to the passed country code is obtained and published/retuened to the getStates methos of checkout-component.ts file (which had made the call by subscribing). Now, once the states array is returned, based on whenther tyhe call was made for shipping address group, shippingAddressStates array gets populated , else the billingAddressStates array gets populated. Once the suitable array is populated, it get5s rendered in dropdown for dtates in cgheckout-component.html file.We also modify the copyShi8ppingToBillingAddress method by adding this.billingAddressStates = this.shippingAddressStates; in case the copy address checkbox is clicked. As in this case, a dirct call to getStates wilol not be made as we have not manually selecvted tjhe country of billing address(as we have clicked checkbox due toi hich the data gets automatically gets copied to billing address group from shipping address group). Hence if th chckbox is clicked,we manually populate th billing states array by copying data from shipping states array. If box is not clicked, the billing states array remains bloank,. and ill get populate donce the user chooses country of the billing address form section. -->
+
+
+
+
+<!-- Actual flow of application(what happns when we click the Purchase button, ie how is order saved to backend in
+database) : -->
+<!-- Firstly, as soon as e click the purchase button(after filling the form), we check if all fields have been filled properly or not. If there is an error, we simply return. Else, if all fields are filld properly, we start the process of sending the order data to the backend. We setup a new order and create the orderItems array. (Order, OrderItem, Address, Purchase etc all these classes are defined corresponding to the entities of same names defined in backend). No we create our DTO (Data transfer object), purchase. This is the object that will be used to send info from frontnd to backend using post method. Once it is populated, we subscribe to the placeOrder method of checkoutService(by inject checkoutService in constructor). Since this is normal type 1 subscription, the method is called immediately by passing the created purchase object, and the returned result(the orderTracking number) is displayd to the user.Inside the placeOrder() method defined inside checkout-service.ts file, we create a suitable url and make a call to backend REST API by making a post request and passing the purchase object.
+Now on the backend, we create a CustomerRepository for interacting with the database. Basically, we ill save the customer in the database, and since customer table is lionked to other tabls(order, which is linkd to norderItms and so on), so saving the customer will approipriately save all data in all linked tables.Hence w create customer repositiry. Also we are not using spring data rest with customer repo(like we used with product and product-category).Hence we need to define the controller as well. So we define the checkout-controller. Inside this controller, we setup a path for postmapping, and associate a method named placeOrderHelper with it.Inside this method, we call the actual placeOrder() method defined in CheckoutServiceImpl class in backend. Inside this method, we we create an unique orderTrackingNumber for this order, and assign it to the current order object. This order is then assigned to the current customer. Thus, we create/populate the suitable customer object and save it to the database using the customerRepo. Once the saving part is done, we return a PurchaseResponse object.This objct contains nly 1 filed, ie the orderTrackingNumber. This snt object is received by the frontend subscrib method and the ordrTracking number is diaplayed to the user. This is how the order gets saved in the backend database. -->
+
+

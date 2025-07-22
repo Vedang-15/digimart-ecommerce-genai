@@ -1,0 +1,135 @@
+# -------------------------------
+# Node / Angular
+# -------------------------------
+node_modules/
+dist/
+.angular/
+.env
+.env.*.local
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Angular local server SSL certs
+sslcert/
+
+# -------------------------------
+# Java / Spring Boot
+# -------------------------------
+target/
+*.log
+*.class
+*.jar
+*.war
+*.iml
+*.iws
+*.ipr
+hs_err_pid*.log
+**/application.properties
+
+
+# IntelliJ
+.idea/
+*.iml
+
+# Maven
+.mvn/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+
+# Gradle
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# -------------------------------
+# Python (in case of any scripts)
+# -------------------------------
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+
+# -------------------------------
+# LM Studio / Ollama (Local GenAI)
+# -------------------------------
+lmstudio*
+ollama/
+*.bin
+*.gguf
+models/
+# You can whitelist sample placeholder names if needed
+!README.md
+
+# -------------------------------
+# VSCode / Editor
+# -------------------------------
+.vscode/
+*.code-workspace
+
+# -------------------------------
+# System / OS
+# -------------------------------
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# -------------------------------
+# Git / Security
+# -------------------------------
+*.pem
+*.key
+*.crt
+*.cert
+*.p12
+*.jks
+*.keystore
+.secret
+secrets/
+credentials/
+
+# -------------------------------
+# Logs / Dumps / Backups
+# -------------------------------
+*.log
+*.bak
+*.tmp
+*.swp
+*.swo
+*.swn
+*.orig
+*.rej
+
+# -------------------------------
+# Miscellaneous
+# -------------------------------
+coverage/
+coverage-final.json
+nyc_output/
+*.tgz
+*.zip
+*.7z
+*.tar.gz
+*.gz
+*.rar
+*.out
+*.exe
+*.dll
+*.obj
+*.so
+
+# -------------------------------
+# Git ignored folders for multi-version project
+# -------------------------------
+mock-ai/node_modules/
+genai-local/node_modules/
+mock-ai/dist/
+genai-local/dist/
+mock-ai/target/
+genai-local/target/

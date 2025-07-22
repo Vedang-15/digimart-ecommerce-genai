@@ -1,0 +1,50 @@
+<div class = "main-content">
+    <div class = "section-content section-content-p30">
+        <div class="container-fluid">
+            <h3>Your Orders</h3>
+            <div *ngIf="orderHistoryList.length > 0">
+                <table class = "table table-bordered">
+                    <tr>
+                        <th width = "20%" scope="col">Order Tracking Number</th>
+                        <th width="10%" scope="col">Total Price</th>
+                        <th width="10%" scope="col">Total Quantity</th>
+                        <th width="10%" scope="col">Date</th>
+                    </tr>
+
+                    <tr *ngFor = "let tempOrderHistory of orderHistoryList">
+                        <td>
+                            {{tempOrderHistory.orderTrackingNumber}}
+                        </td>
+                        <td>
+                            {{tempOrderHistory.totalPrice | currency: 'INR'}}
+                        </td>
+                        <td>
+                            {{tempOrderHistory.totalQuantity}}
+                        </td>
+                        <td>
+                            {{tempOrderHistory.dateCreated | date : 'medium'}}
+                        </td>
+
+                    </tr>
+                </table>
+            </div>
+
+            <!-- if orderHistoryList is empty, ie there are no previous orders corresponding to current customers -->
+             <div *ngIf = "orderHistoryList.length == 0" class = "alert alert-warning col-md-12" role = "alert">
+                No orders found.
+             </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<!-- Actual flow of application (How do we get order history corresponding to a particular user) -->
+    <!-- To implement the order history functionality, firstly we create an OrderRepository in the backend. If we wish to send any entity from backnd to frontend, we need an api and Repository is the thing that creates that api(ans exposes an endpoint) for us. To get order-history, we need to send all orders corresponding to a customer from backnd to frontend. e had an order class uptil now but no orderRepository(that could send orders by exposing endpoints, ie basically we didi not have an api functionality to snd orders to front end from the database). Thus, we add that api functionality for orders by cfreating an OrderRepository. Inside this, we use the findByCustomerEmail() method(this method is given by default by spring). This method internally joins and queries the customer and order tables in th database and returns the orders corresponding to a particular email address. We return the orders and a Page containing objects of Order class(this class is already implemented in backend). Also this api/method exposes the endpoint : "http://localhost:8080/api/orders/search/findByCustomerEmailOrderByDateCreatedDesc?email=something". Thus we have setup backend to return orders corresponding to a particular passd email.
+
+    Now on the frontend part, we first create an orderHistory class. This class objects will be the displayed when the user will view his orderHistory. We then create OrderHistoryService class. Indside this service, we declare the getOrderHistory() method that accepts an emaiul. Inside this method, we use the passed email to create an url and make call to spring boot backend. Once the backend api returns JSON data having orders corresponding to passd email, we mapped the returned data to an array of OrderHistory[]. This happens inside the inteface defined on OrderHistoryService. Important point to note is that, backnd api returns a collestion of objects of type Order(this class is defined in backend), and we mapped the received Order objects(in JSON format) to our OrderHistory objects(OrderHistpory class is dfined in frontend).In order to ensure such mapping, we must make sure that all the fields present in OrderHistory are also present in Order class defined in backdn. Only then, the fields with same names will be populated during mapping. Also, OrderHistory(or in general the class to which we are mapping the backend returnd objects should not have a field which is not prsent in the backend defined class(whose objecvts were sent)). This mapping to an array of Type OrderHistory happens in the OrderHistoryService.
+
+    We then proceed to craete OrderHistory-component. Since we are using email of customer to retreive previous orders, as soon he is authenticated, we store his email in browsers session storage. This happens inside login-status-component.ts file. Also note that , we use local storage to store cart items as we ant them to load again after the broser windo is closd. Hence we use local storage, as in session storsge the dtored data gets lost when broser indo is closd and then reopnend. But in case of email, email is usful only till, th time the user is logged-in, ie useful only for the current session. Hence, we store the email in session storage. Now inside the order-history-component.ts file, we retreive the email from session storage and subscribe to the getOrderHistory() method of OrderService by passing this mail. we assign th returned array of OrderHistory to OrderHistoryList array defined in order-history-componnent.ts Thus, OrderHistoryList gets populated which gets renderd by order-history.html file. Then we add the orders button to header bar in login status componnt. We make sure this button is visible to logged in users only.Upon clicking this button, we redirect the user to route "/order-history".
+    At last, we add an okta-protected route "/order-history" to routes array that rnders the OrderHistory-component. In this ay, Order History is shown to the user. -->

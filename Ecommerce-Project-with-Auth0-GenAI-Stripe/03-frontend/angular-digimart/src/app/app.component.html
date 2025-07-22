@@ -1,0 +1,91 @@
+<div class="page-wrapper">
+
+  <!-- MENU SIDEBAR-->
+  <aside class="menu-sidebar d-none d-lg-block">
+    <div class="logo">
+      <a href="#">
+        <img src="assets/images/digimart_l.png" alt="Digimart" class="img-responsive">
+      </a>
+    </div>
+    
+    <!-- selector for menu component -->
+    <app-product-category-menu></app-product-category-menu>
+
+  </aside>
+  <!-- END MENU SIDEBAR-->
+
+  <!-- PAGE CONTAINER-->
+  <div class="page-container">
+    <!-- HEADER DESKTOP-->
+    <header class="header-desktop">
+      <div class="section-content">
+        <div class="search-container">
+          <app-search></app-search>
+        </div>
+
+        <!-- <div class = "user-actions d-flex align-items-center gap-2">
+          <div class="login-container">
+            <app-login-status></app-login-status>
+          </div>
+
+          <div class="cart-container">
+            <app-cart-status></app-cart-status>
+          </div>
+        </div> -->
+
+        <div class="login-container login-button">
+          <app-login-status></app-login-status>
+        </div>
+
+        <div class="cart-container">
+          <app-cart-status></app-cart-status>
+        </div>
+        
+      </div>
+    </header>
+
+
+    <!-- END HEADER DESKTOP-->
+
+
+
+    <!-- MAIN CONTENT-->
+    <router-outlet></router-outlet>  
+    <!-- handles rendering of all components defined in routes array at any point of time in the application. This is colloective for all selectors tags of all components defined in routes array. -->
+
+  </div>
+
+</div>
+
+
+<!-- END PAGE CONTAINER-->
+
+<footer class="custom-footer">
+  <div class="footer-container">
+    <div class="footer-section company-info">
+      <h4>Digimart</h4>
+      <p>Your one-stop shop for digital essentials.</p>
+    </div>
+    <div class="footer-section quick-links">
+      <h5>Quick Links</h5>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">Help Center</a></li>
+        <li><a href="#">Terms</a></li>
+      </ul>
+    </div>
+    <div class="footer-section social">
+      <h5>Follow Us</h5>
+      <div class="social-icons">
+        <a href="#"><i class="fa fa-facebook-f"></i></a>
+        <a href="#"><i class="fa fa-twitter"></i></a>
+        <a href="#"><i class="fa fa-instagram"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    &copy; 2025 Digimart. All rights reserved.
+  </div>
+</footer>
+

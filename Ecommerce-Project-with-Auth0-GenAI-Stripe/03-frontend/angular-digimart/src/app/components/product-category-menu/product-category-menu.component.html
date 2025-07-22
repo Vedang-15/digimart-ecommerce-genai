@@ -1,0 +1,36 @@
+<div class="menu-sidebar-content js-scrollbar1">
+    <nav class="navbar-sidebar">
+        <ul class="category-list">
+            <li *ngFor="let tempProductCategory of productCategories">
+                <a
+                routerLink="/category/{{ tempProductCategory.id }}"
+                routerLinkActive="active-link"
+                class="category-link"
+                >
+                {{ tempProductCategory.categoryName }}
+                </a>
+            </li>
+
+            <!-- Actual Flow of the application (How categories are getting diaplayed on thesidebar menu)) : 
+                In order to display product-categories, we use a similar procedure that we use for diaplaying products. We create ProductCategory class, it has id and categoryName as attributes. We also create a productCategories array inside product-category-menu-component.ts file(like e created products array inside product-list-component.ts file). Http client then makes a call to the url "http://localhost:8080/api/product-category" and maps the response to productCategories array. This happens as follows : When we try to render app componnt.html file, it contains <app-product-category-menu></app-product-category-menu> tag. Once this tag comes into picture, product-category-menu-component comes into picture. So, the onInit method declared in product-category-menu-component gets triggered. It calls listProductCategoris() metrhos(also declared inside the product-category-menu-compo0nent.ts file).This method in turn make scall to getProductCatgories() methos declared insid productService.ts fil. Here actual mapping of rspons obtained from spring boot rest api takes and ProductCategories array gets populated. Thus the array gets populated. Then inside product-category-component.html file, we loop over the populated array and diaplay ach entry into menu sidebar. Also note that the each product category that is diaplyayd in sidebar acts as a link route for thr router to assign achor link url route to each cxatego0ry, we simply create the route link as "/category/{{ tempProductCategory.id }}", note that tempProductCategory.id represents the id associatde with this catgory. this route can then be used by router to rendr specific page when this category is clicked.-->
+                
+
+
+            <!-- Actual Flow of the application (what happens once we click a routeLink(or how exactly search by Category is working)):
+                When we click on above link, a request is made to router with the path as "/category/1"(where 1 is id of the category hich as clicked, it can vary depending on category chose, i have taken 1 for example), router figures out that corresponding to 
+                this path, it has to render productListComponent (it figures this out from route array). Rendering productListComponent means rendering its html page.
+                Now the moment product-list-component comes into picture, the onInit block present in gets executed(as it is similar to @PostConstruct of springboot)
+                the listProducts() method(present in same file) gets called, This methos checks if there is some category id present is the current active route(ie the rout that had the path corresponding to hich category anchor tag as pressed from sidebar).
+                If category id is null, it assigns a default category id of 1. and then calls getProductList method by passing the categoryId. 
+                The getCategory method gets called. This methos is defined in the ProductService class in product-service.ts file. There we first build the
+                Url (const searchUrl = `${this.baseUrl}/search/findByCategoryId?id=${theCategoryId}`;) 
+                using the passed CategoryId.
+                The http client then makes a call to spring boot REST api by using this URL.
+                Note that spring boot has already exposed an api endpoint that matches this url( That endpoint is declared in PredoctRepository entity in spring boot app).
+                The http client thus obtains the list of products corresponding to the passed categoryId by making a call to rest endpoint and maps it to products array. Thus the products array gets populatd.
+                Once product array gets populated , product-list-component.html(html tempelate file corresponding to productListComponent) gets executed which loops over the populated products array and displays it on the frontend app page(in main-content section/view). -->
+
+
+        </ul>
+    </nav>
+</div>

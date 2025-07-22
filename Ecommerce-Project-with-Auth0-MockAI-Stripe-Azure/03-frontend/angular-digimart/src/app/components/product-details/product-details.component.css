@@ -1,0 +1,134 @@
+/* main outer section - gives background and vertical padding */
+.detail-section {
+  background-color: #f5f7fa;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 20px;
+}
+
+/* 
+ * Wrapper to center the product detail card both vertically and horizontally.
+ * Uses full height minus header height (75px).
+ */
+.detail-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    min-height: calc(100vh - 75px); /* 75px header height compensation */
+}
+
+/* 
+ * Limit width of the detail card to avoid stretching on large screens.
+ */
+.detail-card {
+    background-color: #f3faff;
+    width: auto;
+    max-width: 850px;
+}
+
+/* 
+ * Product image size: now set to fixed width for visual balance.
+ */
+.detail-img {
+    width: 270px; 
+    height: auto;
+    object-fit: contain;
+}
+
+
+
+/* card holding both image and product info side by side */
+.product-detail-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Equal width for image and text */
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  padding: 40px 30px;
+  gap: 30px;
+  align-items: flex-start;
+}
+
+.product-image-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.product-image {
+  max-width: 250px;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.product-info-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  max-width: 100%;
+}
+
+/* styling the product name */
+.product-name {
+  font-size: 26px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+/* product price styling */
+.product-price {
+  font-size: 20px;
+  font-weight: bold;
+  color: #007bff;
+  margin-bottom: 15px;
+}
+
+/* styling the add to cart button */
+.add-to-cart-btn {
+  max-width: 180px;
+  font-size: 15px;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+/* description paragraph */
+.product-description {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #555;
+  margin-bottom: 25px;
+}
+
+/* link to go back to product list */
+.back-link {
+  color: #007bff;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+/* responsive styling for smaller screens */
+@media (max-width: 768px) {
+  .product-detail-card {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .product-info-box {
+    align-items: center;
+    text-align: center;
+  }
+
+  .add-to-cart-btn {
+    width: 100%;
+  }
+}
