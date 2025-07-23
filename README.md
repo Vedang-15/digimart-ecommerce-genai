@@ -1,4 +1,4 @@
-# 🛍️ AI-Powered E-Commerce Web Application
+# 🛍️ Digimart (AI-Powered E-Commerce Web Application)
 
 This is a full-stack e-commerce web application built using **Angular**, **Spring Boot**, and **MySQL**, with integrated **AI-powered features** for enhanced user experience. The application includes secure authentication, order history, and product catalog management. It also demonstrates cutting-edge **Generative AI integration** using **local LLMs** and **mock AI** for production deployment.
 
