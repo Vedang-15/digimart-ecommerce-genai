@@ -31,8 +31,7 @@ public class DigimartApplication {
             ctx.getEnvironment().getPropertySources().addFirst(new MapPropertySource("dotenv", envVars));
         });
 
-        // This will now work
-        System.out.println("Loaded Stripe key: " + System.getProperty("STRIPE_SECRET_KEY"));
+
 
         // Run app
         app.run(args);
