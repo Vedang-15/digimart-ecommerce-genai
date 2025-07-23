@@ -110,6 +110,7 @@ ng serve --ssl true --ssl-key ./sslcert/key.pem --ssl-cert ./sslcert/cert.pem
 
 # For local GenAI version, instead use:
 cd ../genai-local
+```
 
 ### 🧪 Testing
 
