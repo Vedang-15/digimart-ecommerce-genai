@@ -113,11 +113,15 @@ ng serve --ssl true --ssl-key ./sslcert/key.pem --ssl-cert ./sslcert/cert.pem
 cd ../genai-local
 ```
 
+---
+
 ### 🧪 Testing
 
 - Backend APIs tested via **Postman**  
 - Frontend tested using **Angular CLI** with mocked services  
 - **JWT and role-based access** thoroughly validated  
+
+---
 
 ### 🌐 Deployment
 
@@ -126,9 +130,13 @@ cd ../genai-local
 - **CORS** and **HTTPS** enabled  
 - Uses **real SSL certificates**, not self-signed  
 
+---
+
 ### 🧾 License
 
 This project is licensed under the **MIT License**. See [LICENSE](./LICENSE) for details.
+
+---
 
 ### 💬 Contact
 
