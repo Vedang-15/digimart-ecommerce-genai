@@ -10,6 +10,7 @@ import com.example.digimart.entity.OrderItem;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.PaymentIntent;
+import io.github.cdimascio.dotenv.Dotenv;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,12 +24,15 @@ public class CheckoutServiceImpl implements CheckoutService{
     private CustomerRepository theCustomerRepo;
 
     @Autowired
-    public CheckoutServiceImpl(CustomerRepository customerRepository, @Value("${stripe.key.secret}") String secretKey){
-        theCustomerRepo = customerRepository;
+    public CheckoutServiceImpl(CustomerRepository customerRepository) {
+        this.theCustomerRepo = customerRepository;
 
-        //initialize stripe api with the sceret key(dfined in application.properties file)
+        // Load from .env
+        Dotenv dotenv = Dotenv.load();
+        String secretKey = dotenv.get("STRIPE_SECRET_KEY");
+
+        // Set Stripe key
         Stripe.apiKey = secretKey;
-
     }
 
     @Override
