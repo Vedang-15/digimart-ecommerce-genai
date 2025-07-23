@@ -54,21 +54,22 @@ This is a full-stack e-commerce web application built using **Angular**, **Sprin
 
 ---
 
-## 📁 Project Structure
+### 📁 Project Structure
 
+```plaintext
 ecommerce-project/
-│
-├── frontend-angular/
-│ ├── mock-ai/ # Version for deployment with mock AI
-│ └── genai-local/ # Local version with real AI integration
-│
-├── backend-springboot/
-│ └── src/
-│ └── pom.xml
-│
+├── mock-ai/
+│   ├── frontend-angular/
+│   ├── backend-springboot/
+│   └── starter-files/
+├── genai-local/
+│   ├── frontend-angular/
+│   ├── backend-springboot/
+│   └── starter-files/
 ├── .gitignore
-├── README.md
-└── LICENSE
+└── README.md
+```
+
 
 
 
