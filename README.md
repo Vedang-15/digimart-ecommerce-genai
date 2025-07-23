@@ -94,7 +94,7 @@ To run the real AI version locally:
 ---
 
 ## 🛠️ Local Setup Instructions
-
+```bash
 # Clone the repository
 git clone https://github.com/yourusername/ecommerce-ai-app.git
 cd ecommerce-ai-app
@@ -110,41 +110,4 @@ ng serve --ssl true --ssl-key ./sslcert/key.pem --ssl-cert ./sslcert/cert.pem
 
 # For local GenAI version, instead use:
 cd ../genai-local
-
-
-🧪 Testing  
-- Backend APIs tested via **Postman**  
-- Frontend tested using **Angular CLI** with mocked services  
-- **JWT and role-based access** thoroughly validated  
-
-
-🌐 Deployment  
-- Frontend hosted on **Azure Static Web Apps** (mock AI version)  
-- Backend deployed on **Azure App Service**  
-- **CORS** and **HTTPS** enabled  
-- Uses **real SSL certificates**, not self-signed  
-
-
-🧾 License  
-This project is licensed under the **MIT License**. See [LICENSE](./LICENSE) for details.
-
-
-✨ Screenshots  
-📦 **Home Page**  
-🔐 **Login**  
-🧠 **AI Generator**  
-📄 **Order History**  
-> *(Add screenshots here as needed)*
-
-
-📣 Credits  
-- [Auth0](https://auth0.com) for authentication  
-- [LM Studio](https://lmstudio.ai) for local LLM serving  
-- [Ollama](https://ollama.com) as an optional alternative to LM Studio  
-- [Angular](https://angular.io), [Spring Boot](https://spring.io/projects/spring-boot)
-
-
-💬 Contact  
-For queries or collaboration:  
-📧 [vedanghatekar@gmail.com](mailto:vedanghatekar@gmail.com)
 
