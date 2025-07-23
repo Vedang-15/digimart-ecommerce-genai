@@ -95,7 +95,6 @@ To run the real AI version locally:
 
 ## 🛠️ Local Setup Instructions
 
-```bash
 # Clone the repository
 git clone https://github.com/yourusername/ecommerce-ai-app.git
 cd ecommerce-ai-app
