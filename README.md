@@ -111,3 +111,26 @@ ng serve --ssl true --ssl-key ./sslcert/key.pem --ssl-cert ./sslcert/cert.pem
 # For local GenAI version, instead use:
 cd ../genai-local
 
+### 🧪 Testing
+
+- Backend APIs tested via **Postman**  
+- Frontend tested using **Angular CLI** with mocked services  
+- **JWT and role-based access** thoroughly validated  
+
+### 🌐 Deployment
+
+- Frontend hosted on **Azure Static Web Apps** (mock AI version)  
+- Backend deployed on **Azure App Service**  
+- **CORS** and **HTTPS** enabled  
+- Uses **real SSL certificates**, not self-signed  
+
+### 🧾 License
+
+This project is licensed under the **MIT License**. See [LICENSE](./LICENSE) for details.
+
+### 💬 Contact
+
+For queries or collaboration:  
+📧 [vedanghatekar@gmail.com](mailto:vedanghatekar@gmail.com)
+
+
