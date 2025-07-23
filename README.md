@@ -46,7 +46,7 @@ This is a full-stack e-commerce web application built using **Angular**, **Sprin
 | Layer     | Technologies Used                                            |
 |-----------|--------------------------------------------------------------|
 | Frontend  | Angular, TypeScript, HTML/CSS                                |
-| Backend   | Java, Spring Boot, Spring Security, Auth0, Stripe (Payemnts                    |
+| Backend   | Java, Spring Boot, Spring Security, Auth0, Stripe (Payemnts)                    |
 | Database  | MySQL                                                    |
 | AI Engine | Mistral 7B Instruct, LM Studio                      |
 | Hosting   | Azure App Service (HTTPS-enabled), Azure Static Web Apps     |
