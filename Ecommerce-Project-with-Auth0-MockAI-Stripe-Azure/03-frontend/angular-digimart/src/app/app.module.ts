@@ -98,6 +98,37 @@ Deploying code is the process of moving code changes from a development environm
 */
 
 
+
+/*Deployment summary:
+
+🔵 Frontend (Angular app)
+Deployment Platform: Azure Static Web Apps
+Code Location: mock-ai/frontend-angular
+CI/CD Flow:
+You push to your GitHub repo:
+
+git push origin main
+
+Azure Static Web Apps uses GitHub Actions to auto-build and auto-deploy
+No need to manually deploy — just push to GitHub ✅
+
+🟢 Backend (Spring Boot app)
+Deployment Platform: Azure App Service
+Code Location: mock-ai/backend-springboot (or wherever your backend folder is)
+CI/CD Flow:
+You do a manual git push to Azure remote (not GitHub):
+
+git remote add azure https://<your-app-name>.scm.azurewebsites.net/yourapp.git
+git push origin main (push to your github repo first)
+git push azure main:master (push from main of your local github repo to master branch of azure remote repo. Azure app services triggers deployment only when code is pushed to master branch of remote azure repo, not to any other branch.)
+
+This uploads the backend code directly to Azure App Service, which builds and hosts it
+No GitHub Actions involved here unless you manually set them up
+
+*/
+
+
+
 /* API vs Library */
 /*
 Often APIs and a libraries have a 1:1 relationship, so I can understand some of the confusion. Often, a library to solve some problem has its specific way how to interact with the library (making up the API).
