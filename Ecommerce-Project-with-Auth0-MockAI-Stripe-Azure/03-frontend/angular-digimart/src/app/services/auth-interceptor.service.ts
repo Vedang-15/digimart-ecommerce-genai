@@ -17,7 +17,7 @@ export class AuthInterceptorService implements HttpInterceptor {
   }
 
   private async handleAccess(request: HttpRequest<any>, next: HttpHandler): Promise<HttpEvent<any>> {
-    const securedEndpoints = ['https://localhost:8443/api/orders'];
+    const securedEndpoints = ['https://ecommerce-backend-api123.azurewebsites.net/api/orders'];
 
     if (securedEndpoints.some((url) => request.urlWithParams.includes(url))) {
       await this.auth.getAccessTokenSilently().forEach((token) => {
