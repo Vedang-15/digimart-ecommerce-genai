@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.List;
 
-@CrossOrigin("https://localhost:4200")
+@CrossOrigin("https://gray-ocean-09ecb650f.1.azurestaticapps.net")
 @RepositoryRestResource
 public interface ProductRepository extends JpaRepository<Product, Long> {
     Page<Product> findByCategoryId(@Param("id") Long id, Pageable pageable);

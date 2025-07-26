@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-@CrossOrigin("https://localhost:4200")
+@CrossOrigin("https://gray-ocean-09ecb650f.1.azurestaticapps.net")
 @RepositoryRestResource
 public interface OrderRepository extends JpaRepository<Order, Long> {
 

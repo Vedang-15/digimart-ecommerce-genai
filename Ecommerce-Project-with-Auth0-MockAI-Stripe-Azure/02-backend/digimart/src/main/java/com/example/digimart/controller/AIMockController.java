@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/ai")
-@CrossOrigin(origins = "https://localhost:4200") // In dev only. Use config in prod.
+@CrossOrigin(origins = "https://gray-ocean-09ecb650f.1.azurestaticapps.net") // In dev only. Use config in prod.
 public class AIMockController {
 
     private final MockAIService mockAIService;

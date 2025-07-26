@@ -10,7 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin("https://localhost:4200")
+@CrossOrigin("https://gray-ocean-09ecb650f.1.azurestaticapps.net")
 @RestController
 @RequestMapping("/api/checkout")
 public class CheckoutController {
