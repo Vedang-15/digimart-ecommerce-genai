@@ -17,7 +17,7 @@ public class State {
 
     //country_id column in state table is the foreign key that binds the country and state tables in database, hence we use @ManyToOne and @JoinColumn annotations ith ith.
     @ManyToOne
-    @JoinColumn(name = "country_id")
+    @JoinColumn(name = "country_id", nullable = false)
     private Country country;
 
 
