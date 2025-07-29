@@ -10,10 +10,10 @@ import com.example.digimart.entity.OrderItem;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.PaymentIntent;
-import io.github.cdimascio.dotenv.Dotenv;
+// REMOVE THIS IMPORT: import io.github.cdimascio.dotenv.Dotenv; // <--- REMOVE THIS LINE
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Value; // KEEP THIS IMPORT
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -23,16 +23,20 @@ public class CheckoutServiceImpl implements CheckoutService{
 
     private CustomerRepository theCustomerRepo;
 
+    // ADD THIS FIELD TO INJECT THE VALUE FROM ENVIRONMENT VARIABLE
+    @Value("${STRIPE_SECRET_KEY}")
+    private String stripeSecretKey;
+
     @Autowired
     public CheckoutServiceImpl(CustomerRepository customerRepository) {
         this.theCustomerRepo = customerRepository;
 
-        // Load from .env
-        Dotenv dotenv = Dotenv.load();
-        String secretKey = dotenv.get("STRIPE_SECRET_KEY");
+        // REMOVE THE FOLLOWING 3 LINES (RELATED TO DOTENV)
+        // Dotenv dotenv = Dotenv.load();
+        // String secretKey = dotenv.get("STRIPE_SECRET_KEY");
 
-        // Set Stripe key
-        Stripe.apiKey = secretKey;
+        // USE THE INJECTED stripeSecretKey FIELD INSTEAD
+        Stripe.apiKey = stripeSecretKey; // <--- CHANGE THIS LINE
     }
 
     @Override
