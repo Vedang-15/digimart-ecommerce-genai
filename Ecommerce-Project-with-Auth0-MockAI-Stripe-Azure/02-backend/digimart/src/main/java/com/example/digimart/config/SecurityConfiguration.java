@@ -28,12 +28,13 @@ public class SecurityConfiguration {
                         .requestMatchers("/api/orders/**").authenticated()
                         .anyRequest().permitAll()
                 )
-                .cors(Customizer.withDefaults())
+                .cors(cors -> cors.configurationSource(corsConfigurationSource())) // <-- Important!
                 .csrf(csrf -> csrf.disable())
                 .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));
 
         return http.build();
     }
+
 
     @Bean
     public JwtDecoder jwtDecoder() {
