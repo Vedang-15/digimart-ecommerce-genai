@@ -62,6 +62,6 @@ public class AIMockController {
 }
 
 // To run/trigger product description filling in db using json file (mock ai) do the following -
-//1. In postman, make a post request to : https://localhost:8443/api/ai/populate-db, do not send any data. just put the header as Content-Type --- application/json
+//1. In postman, make a post request to : https://localhost:8443/api/ai/populate-db (for local version) and https://ecommerce-backend-api123.azurewebsites.net/api/ai/populate-db (for azure hosted version), do not send any data. just put the header as Content-Type --- application/json
 //2. This should do everything - check the db for null descriptions - obatin descriptions for those products from json and fill the db with those descriptions.
 
