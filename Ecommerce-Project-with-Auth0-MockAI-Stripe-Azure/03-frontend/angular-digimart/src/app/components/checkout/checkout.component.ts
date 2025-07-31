@@ -365,7 +365,7 @@ export class CheckoutComponent implements OnInit {
 
 
     // compute the payment info(total amount) so that we can populate the paymentInfo object and send it using post request(by calling the checkout service method) to thye spring boot backend. This backend will in turn use this pass paymentInfo object info to create the  paymentIntent, which it will send to/get verfied from the strip servers.
-    this.paymentInfo.amount = Math.round(this.totalPrice * 100); 
+    this.paymentInfo.amount = this.totalPrice; 
     this.paymentInfo.currency = "USD";
     this.paymentInfo.receiptEmail = purchase.customer.email;
     // In order for stripe to send payment recpipt by email to the client, stripe must know the email address of the customer. Now we are directly providing the customers info(email, name, address) to strip directly through the confirmCardPayment method written below, but that info(along with credit card info) is going directly to strip servers. But for stripe to send payment receipt via email, th customers mail must b included in the paymentIntent, wheras in above case w are sending it dirctly to stripe servers via confirmCardPayment method. Thus, we include a ne field (receiptEmail) in paymentInfo object. This object ill be passed to backend and the valu of this new receiptEmail field will be usd by backend while creating paymentIntent (at th backnd). In this way, email will be present/included in paymentIntent and stripe will use that email to send payment receipt to the customer.
