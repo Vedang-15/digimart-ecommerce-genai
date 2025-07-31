@@ -83,7 +83,7 @@ export class AppModule { }
 
 
 
-
+/* Deployed app can be accessed at - https://gray-ocean-09ecb650f.1.azurestaticapps.net */
 
 
 
