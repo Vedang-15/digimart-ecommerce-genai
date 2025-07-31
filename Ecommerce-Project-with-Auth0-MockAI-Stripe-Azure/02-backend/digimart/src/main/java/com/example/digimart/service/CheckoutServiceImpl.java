@@ -37,6 +37,7 @@ public class CheckoutServiceImpl implements CheckoutService{
     @PostConstruct // <--- NEW ANNOTATION
     public void init() {
         Stripe.apiKey = stripeSecretKey; // <--- Set the API key here!
+        System.out.println("Stripe API Key set via @PostConstruct. Key starts with: " + (stripeSecretKey != null ? stripeSecretKey.substring(0, 7) + "..." : "null"));
     }
 
     @Override
