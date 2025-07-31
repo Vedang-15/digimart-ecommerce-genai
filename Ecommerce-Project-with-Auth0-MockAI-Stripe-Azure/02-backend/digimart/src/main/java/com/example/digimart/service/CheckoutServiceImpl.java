@@ -23,7 +23,7 @@ public class CheckoutServiceImpl implements CheckoutService{
 
     private CustomerRepository theCustomerRepo;
 
-    @Value("${STRIPE_SECRET_KEY}")
+    @Value("${stripe.key.secret}")
     private String stripeSecretKey;
 
     @Autowired
