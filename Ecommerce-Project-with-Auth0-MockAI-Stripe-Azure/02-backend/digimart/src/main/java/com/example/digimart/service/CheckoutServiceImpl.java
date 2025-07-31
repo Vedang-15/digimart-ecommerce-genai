@@ -10,7 +10,7 @@ import com.example.digimart.entity.OrderItem;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.PaymentIntent;
-// REMOVE THIS IMPORT: import io.github.cdimascio.dotenv.Dotenv; // <--- REMOVE THIS LINE
+import jakarta.annotation.PostConstruct; 
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value; // KEEP THIS IMPORT
@@ -23,20 +23,20 @@ public class CheckoutServiceImpl implements CheckoutService{
 
     private CustomerRepository theCustomerRepo;
 
-    // ADD THIS FIELD TO INJECT THE VALUE FROM ENVIRONMENT VARIABLE
     @Value("${STRIPE_SECRET_KEY}")
     private String stripeSecretKey;
 
     @Autowired
     public CheckoutServiceImpl(CustomerRepository customerRepository) {
         this.theCustomerRepo = customerRepository;
+        // Do NOT set Stripe.apiKey here. It will be null at this point.
+    }
 
-        // REMOVE THE FOLLOWING 3 LINES (RELATED TO DOTENV)
-        // Dotenv dotenv = Dotenv.load();
-        // String secretKey = dotenv.get("STRIPE_SECRET_KEY");
-
-        // USE THE INJECTED stripeSecretKey FIELD INSTEAD
-        Stripe.apiKey = stripeSecretKey; // <--- CHANGE THIS LINE
+    // This method will be called by Spring AFTER dependency injection is complete
+    // and after the constructor has run.
+    @PostConstruct // <--- NEW ANNOTATION
+    public void init() {
+        Stripe.apiKey = stripeSecretKey; // <--- Set the API key here!
     }
 
     @Override
