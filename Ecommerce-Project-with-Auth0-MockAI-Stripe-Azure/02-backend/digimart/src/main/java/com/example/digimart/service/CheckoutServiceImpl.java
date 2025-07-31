@@ -83,7 +83,7 @@ public class CheckoutServiceImpl implements CheckoutService{
     @Override
     public PaymentIntent createPaymentIntent(PaymentInfo paymentInfo) throws StripeException {
 
-        // create the PaymentInfo using th info present in the the PaymentInfo object( this as received from frontend)
+        // create the PaymentInfo using th info present in the PaymentInfo object( this as received from frontend)
         List<String> paymentMethodTypes = new ArrayList<>();
         paymentMethodTypes.add("card");
 
@@ -94,7 +94,11 @@ public class CheckoutServiceImpl implements CheckoutService{
         params.put("description", "Digimart Purchase");
         params.put("receipt_email", paymentInfo.getReceiptEmail());
 
-        return PaymentIntent.create(params);   // this will create the paymentIntent object and return it.
+        System.out.println("DEBUG: Calling PaymentIntent.create(params)...");
+        PaymentIntent result = PaymentIntent.create(params);// this will create the paymentIntent object and return it.
+        System.out.println("DEBUG: PaymentIntent.create(params) returned successfully.");
+
+        return result;
     }
 
     private String generateOrderTrackingNumber(){
