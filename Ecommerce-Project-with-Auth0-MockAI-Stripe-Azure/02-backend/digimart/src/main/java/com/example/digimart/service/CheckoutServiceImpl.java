@@ -29,6 +29,8 @@ public class CheckoutServiceImpl implements CheckoutService{
     @Autowired
     public CheckoutServiceImpl(CustomerRepository customerRepository) {
         this.theCustomerRepo = customerRepository;
+        Stripe.apiKey = stripeSecretKey; // <--- Set the API key here!
+        System.out.println("Stripe API Key set via @PostConstruct. Key starts with: " + (stripeSecretKey != null ? stripeSecretKey.substring(0, 7) + "..." : "null"));
         // Do NOT set Stripe.apiKey here. It will be null at this point.
     }
 
