@@ -5,7 +5,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { AuthModule, AuthGuard } from '@auth0/auth0-angular'; // used to configure auth0 integration with our app
+import { AuthModule } from '@auth0/auth0-angular';
+import { AuthGuard as Auth0Guard } from '@auth0/auth0-angular'; // default - used to configure auth0 integration with app
+import { AuthGuard as CustomAuthGuard } from './auth.guard';     // your custom one - for protecting checkout route
 
 import { AppComponent } from './app.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
@@ -22,12 +24,13 @@ import { OrderHistoryComponent } from './components/order-history/order-history.
 import { ProductService } from './services/product.service';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
 
+
 import myAppConfig from './config/my-app-config';
 
 const routes: Routes = [
-  { path: 'order-history', component: OrderHistoryComponent, canActivate: [AuthGuard] },
-  { path: 'members', component: MembersPageComponent, canActivate: [AuthGuard] },   // here we are making this route protected using AuthGuard route guard.
-  { path: 'checkout', component: CheckoutComponent },
+  { path: 'order-history', component: OrderHistoryComponent, canActivate: [Auth0Guard] },
+  { path: 'members', component: MembersPageComponent, canActivate: [Auth0Guard] },   // here we are making this route protected using AuthGuard route guard.
+  { path: 'checkout', component: CheckoutComponent, canActivate: [CustomAuthGuard] },
   { path: 'cart-details', component: CartDetailsComponent },
   { path: 'products/:productId', component: ProductDetailsComponent },
   { path: 'search/:keyword', component: ProductListComponent },
